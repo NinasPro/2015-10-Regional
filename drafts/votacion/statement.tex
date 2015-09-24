@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+
+\title{Votación Electrónica}
+
+\begin{document}
+\maketitle
+
+La Organización de Comercio Internacional (OCI) está pasando por un proceso de
+cambio de directiva. Años anteriores este proceso ha sido muy largo y tedioso,
+pues miembros de todo el mundo deben votar para escoger a sus representantes. La 
+directiva de la OCI está formada por 5 miembros quienes con todo su esfuerzo
+intentan que la organización funcione de la mejor forma posible. Cada año un
+miembro de la directiva debe dejar el cargo y se abre la posibilidad para que
+otra persona postule. Es decir, es necesario escoger un único representante vez.
+Como la OCI es una organización muy popular cada año postula gente de todo el
+mundo al cargo directivo.  
+
+La elección del representante es democrática y el candidato electo tiene que ser
+escogido por mayoría absoluta, es decir, debe sacar más de la mitad de los
+votos. Si ningún candidato obtiene más de la mitad de los votos el cupo queda
+vacante.
+
+Para simplificar el proceso, este año la organización desea implementar un
+sistema de votación electrónica. Como imaginarás, al ser una organización
+dedicada al comercio, en la OCI nadie sabe programar y necesitan ayuda de gente
+externa para poder implementar el sistema. Con ayuda de muchos voluntarios han
+logrado completar gran parte del sistema, pero falta una parte fundamental. El
+sistema puede recolectar todos los votos pero aún no es capaz de determinar si
+existe un candidato que haya obtenido más de la mitad de los votos.
+
+Dada la lista de votos tu tarea es implementar un programa que determine quién
+es el ganador de la elección en caso de que exista uno. Para que un candidato
+sea ganador debe obtener más de la mitad de los votos, si obtiene exactamente la
+mitad este no es considerado ganador.
+
+\section*{Entrada}
+La entrada consiste en dos líneas. La primera línea contiene dos entero
+positivos separados por un espacio, que indican respectivamente la cantidad de
+votantes ($V$) y la cantidad de candidatos ($C$). Los candidatos son representados
+con números de 1 a $C$. La siguiente línea contiene $V$ enteros entre 1 y $C$
+que representan por que candidato votó cada persona. El primer entero el
+candidato por el que votó la primera persona, el segundo entero el candidato por
+el que votó la segunda, etc.
+
+\section*{Salida}
+Tu respuesta debe consistir en una única línea con un entero. En caso de existir
+un ganador debes imprimir el número del candidato ganador. En caso de que ningún
+candidato haya resultado ganador debes imprimir -1.
+
+\end{document}
