@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+
+\title{Escalera de la muerte}
+
+\begin{document}
+\maketitle
+
+Han desafiado a alguien, que siempre había subido y bajado usando el ascensor, a recorrer la tenebrosa escalera de la muerte, que podría ser de subida o de bajada.
+Al desafiado le gustaría saber si puede lograr el desafío sin morir en el intento así que logra conseguir/crear un mapa de la escalera, y te pide ayuda pues con tus grandiosas habilidades de programación le podrás dar la valiosa información.
+El mapa es un arreglo de la altura medida en pies desde el piso en cada peldaño, y las alturas siempre son un número entero.
+El desafiado es muy frágil física y mentalmente, y por tanto se debe tener las siguientes consideraciones:
+No es capaz de saltar así que siempre va de peldaño en peldaño.
+También se sabe que no es capaz de subir a un peldaño si está a más de 2 pies de altura respecto al anterior, y que si lo intenta su cabeza explota de la frustración.
+Además, si intenta bajar 5 o más pies entre dos peldaños cae incorrectamente y su cuerpo se revienta.
+Se sabe que no hay problemas para llegar al primer peldaño ni para salir del último.
+
+\section*{Entrada}
+n (cantidad de peldaños, entre 0 y 10000)
+h1 h2 h3 ... hn (altura de cada peldaño en pies, entre 0 y 10000)
+
+\section*{Salida}
+"Muere en el intento :(" Si muere en el intento.
+"Logra llegar al final :)" Si no.
+
+\section*{Subtareas}
+La escalera no baja entre un peldaño y otro. 50 puntos.
+La escalera puede subir o bajar entre un peldaño y otro. 50 puntos.
+
+
+\section*{Solución Esperada}
+Recorrer el array y para cada par de peldaños ver si su diferencia está en el rango [-4, -2].
+
+
+ 
+
+\end{document}
