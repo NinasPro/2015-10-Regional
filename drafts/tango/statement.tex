@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+
+\title{Tango}
+
+\begin{document}
+\maketitle
+
+Después de mucho pensarlo, Nelman ha decidido tomar clases de tango. Después de
+cotizar en clubes, centros culturales y gimnasios, ha resuelto aprender en
+Overflow Club International, tanto por su ubicación accesible como por sus
+excelentes precios.
+
+Al llegar a la primera lección y tras los ejercicios de calentamiento, Vardier,
+el instructor, indicó a los asistentes que formen parejas. Aquí es donde 
+empezaron las dificultades, pues Vardier tiene ciertas manías estéticas. Para
+Vardier, los hombres siempre deben bailar junto a una mujer, y además, ésta no
+debe ser de mayor estatura que el hombre (una manía bastante machista, pensó
+Nelman).
+
+Por fortuna, el número de hombres y de mujeres es el mismo, pero aun así,
+Vardier no permitirá que la clase continúe si al menos la mitad de las parejas
+no se forma acorde a su particular criterio, espantado por tal aberración de
+forma. ¿Puedes ayudar a Nelman a definir las parejas de manera tal que Vardier
+esté contento y así continúe su clase?
+
+\section*{Input}
+%FIXME no hay sangría
+La primera línea de la entrada contiene un único entero $N$, que corresponde al
+número de parejas en la clase. A continuación, siguen dos líneas. Éstas
+contienen cada una $N$ números $h_1 \dots h_N$ y $m_1 \dots m_N$, separados por
+espacios. Éstos corresponden a las alturas de los hombres ($h_i$) y mujeres
+($m_i$) participantes de la clase.
+
+\section*{Salida}
+%FIXME no hay sangría
+Debes imprimir cada pareja en una línea. Cada línea es de la forma $i$ $j$, que
+indica que el $i$-ésimo hombre (dentro de la lista de alturas) bailará con la
+$j$-ésima mujer (de la lista de alturas).
+
+Si no es posible formar parejas tal que al menos
+$\left\lceil\frac{N}{2}\right\rceil$ de ellas cumplan la exigencia de Vardieri,
+se debe imprimir una sola línea con la palabra ``\verb+aberracion+'' en lugar
+de la lista de parejas.
+
+
+\end{document}
