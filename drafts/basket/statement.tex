@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{fullpage}
+\usepackage{verbatim}
 
 \title{Partido de Ping pong}
 
@@ -26,6 +27,7 @@ Hay que imprimir dos lineas, la primera con los 5 mejores jugadores en ataque y 
 
 Input:
 
+\begin{verbatim}
 10
 1 10
 2 9
@@ -37,11 +39,14 @@ Input:
 8 3
 9 2
 10 1
+\end{verbatim}
 
 Output:
 
+\begin{verbatim}
 0 1 2 3 4
 9 8 7 6 5
+\end{verbatim}
 
 \section*{Solucion}
 Solucion: primera subtarea puede ser ordenar en $O(N\log(N))$ (lexicograficamente) e imprimir los 5 primeros, la otra version mejorada es buscar el minimo 5 veces lo cual es $O(N)$
