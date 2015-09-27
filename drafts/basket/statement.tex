@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+
+\title{Partido de Ping pong}
+
+\begin{document}
+\maketitle
+
+En un partido de basketball hay 5 jugadores por equipo en cancha, un director técnico tiene $N$ jugadores, y dependiendo de la corriente en el partido
+el necesitará poner a ciertos jugadores con ciertas habilidades, las habilidades principales de los jugadores son ataque y defensa, estas dos habilidades
+se pueden representar con el numero A y D por cada jugador, y tenemos que ayudarlo a seleccionar los 5 mejores jugadores en ataque y los 5 mejores jugadores
+en defensa para que juegon cuando sea necesario.
+
+\section*{Entrada}
+
+Primero una linea con un numero $N$, la cantidad de jugadores que hay, a continuacion vienen N lineas que consisten en dos numeros cada uno separados por espacio
+$A_i$ y $D_i$, el ataque y la defensa del $i$-esimo jugador ($i$ de 0 a $N-1$ inclusive), se garantiza q no hay jugadores con el mismo nivel de ataque y defensa, en caso de
+igualar en ataque se compara la defensa y viceversa
+
+\section*{Salida}
+
+Hay que imprimir dos lineas, la primera con los 5 mejores jugadores en ataque y la segunda con los 5 mejores jugadores en defensa
+
+\section*{Casos de prueba}
+
+Input:
+
+10
+1 10
+2 9
+3 8
+4 7
+5 6
+6 5
+7 4
+8 3
+9 2
+10 1
+
+Output:
+
+0 1 2 3 4
+9 8 7 6 5
+
+\section*{Solucion}
+Solucion: primera subtarea puede ser ordenar en $O(N\log(N))$ (lexicograficamente) e imprimir los 5 primeros, la otra version mejorada es buscar el minimo 5 veces lo cual es $O(N)$
+
+
+\end{document}
