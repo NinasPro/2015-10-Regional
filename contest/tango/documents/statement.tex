@@ -1,0 +1,51 @@
+\documentclass{oci}
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum}
+
+\title{Parejas para el Tango}
+
+\begin{document}
+\begin{problemDescription}
+Luego de meditarlo por mucho tiempo, Nelman ha decidido tomar clases de tango.
+Después de cotizar en clubes, centros culturales y gimnasios, ha determinado inscribirse en el famoso Okura Club International, tanto por su ubicación como por sus excelentes precios.
+
+Al llegar a la primera lección y tras los ejercicios de calentamiento, Vardieri, el instructor, indicó a los asistentes que debían formar parejas.
+Aquí es donde empezaron las dificultades, pues Vardieri tiene ciertas manías estéticas muy extrañas.
+Para Vardieri, los hombres siempre deben bailar junto a una mujer, y además, esta no puede ser de mayor estatura que el hombre (una manía bastante retrograda, pensó Nelman).
+
+Vardieri permitirá que la clase continúe mientras no se formen las parejas y no tolerará bajo ningún motivo a una pareja que no cumpla con su criterio.
+Mientras todos se miran sin saber que hacer Vardieri espera tranquilo en una esquina de la sala.
+Tratando de salvar la clase, Nelman propone formar la mayor cantidad de parejas posibles aunque esto signifique que algunos se queden sin poder bailar.
+Todos están de acuerdo con esto pero aún siguen sin saber como formar las parejas de forma que se armen la mayor cantidad posible.
+
+En la sala hay la misma cantidad de mujeres que de hombres y además no hay dos hombres con la misma estatura ni dos mujeres con la misma estatura.
+Esto es, todos los hombres son de estaturas distintas y lo mismo para las mujeres.
+Tu tarea es ayudar a los asistentes para que formen la mayor cantidad de parejas posibles.
+Notar que puede haber más de una forma de asignar las parejas para que esto se cumpla y si este es el caso cualquier forma servirá.
+
+\end{problemDescription}
+
+\begin{inputDescription}
+La primera línea de la entrada contiene un único entero $N$ que corresponde a la cantidad de hombres y de mujeres.
+La segunda contiene $N$ enteros positivos que describen las alturas de los hombres.
+Similarmente la tercera línea contiene $N$ enteros positivos que describen las alturas de las mujeres.
+Debes asumir que tanto en la lista de hombres como de mujeres no existirán números repetidos.
+\end{inputDescription}
+
+\begin{outputDescription}
+Debes imprimir cada pareja en una línea separada.
+Cada línea debe contener dos enteros $H$ y $M$, correspondientes respectivamente a las alturas del hombre y de la mujer en la pareja.
+\end{outputDescription}
+
+\begin{scoreDescription}
+  \score{30} Se probarán varios casos donde todos los hombres son de la misma estatura y todas las mujeres son de la misma estatura.
+  \score{30} Se probarán varios casos donde para cada mujer existe un hombre de la misma estatura.
+  \score{40} Se probarán varios casos donde no hay restricciones adicionales.
+\end{scoreDescription}
+
+\begin{sampleDescription}
+% \sampleIO{sample}
+% \sampleIO{sample}
+\end{sampleDescription}
+
+\end{document}
