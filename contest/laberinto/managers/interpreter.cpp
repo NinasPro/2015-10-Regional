@@ -11,21 +11,19 @@
 // If first line is 1 -> no cumple condiciones
 // If first line is 2 -> Cumple condiciones pero no recogió todos los objetos
 // If first line is 3 -> Cumple condiciones y recogió todos los objetos :-)
+// If first line is 4 -> Se quedo loopeando
 
 #include <iostream>
 #include <cstdio>
-#include <istream>
-#include <memory>
+#include <set>
 #include <fstream>
-#include <algorithm>
 #include <string>
-#include <functional>
 #include <unordered_map>
 #include <stack>
 #include <vector>
-#include <boost/variant.hpp>
+#include <boost/variant/variant.hpp>
+#include <boost/variant/apply_visitor.hpp>
 #include <boost/algorithm/string/trim.hpp>
-#include <cassert>
 using namespace std;
 
 void abort(const std::string &str) {
@@ -123,11 +121,29 @@ struct Simulator {
   int diry;
   int objects;
   vector<vector<int>> grid;
+  set<tuple<uint,uint,int,int> > states;
   Simulator(vector<vector<int> > &&grid, uint x, uint y, int dx, int dy,
             int o)
     : posx(x), posy(y), dirx(dx), diry(dy), objects(o),
       grid(std::move(grid))  {}
   void simulate(const std::vector<Command> &cmds);
+
+  void clearStates() {
+    states.clear();
+  }
+
+  void checkLoop() {
+    if (states.count(make_tuple(posx, posy, dirx, diry))) {
+      printf("4\n");
+      printf("Tus instrucciones hicieron que Olonso entrara"
+             " a un loop sin fin.\n");
+      exit(0);
+    }
+  }
+
+  void recordState() {
+    states.insert(make_tuple(posx, posy, dirx, diry));
+  }
 
   void forward() {
     if (checkCond(PATH_FORWARD)) {
@@ -141,40 +157,40 @@ struct Simulator {
   }
 
   void turnLeft() {
-    if (posx == 0 and posy == 1) {
-      posx = -1;
-      posy = 0;
+    if (dirx == 0 and diry == -1) {
+      dirx = -1;
+      diry = 0;
     }
-    else if (posx == -1 and posy == 0) {
-      posx = 0;
-      posy = -1;
+    else if (dirx == -1 and diry == 0) {
+      dirx = 0;
+      diry = 1;
     }
-    else if (posx == 0 and posy == -1) {
-      posx = 1;
-      posy = 0;
+    else if (dirx == 0 and diry == 1) {
+      dirx = 1;
+      diry = 0;
     }
-    else if (posx == 1 and posy == 0) {
-      posx = 0;
-      posy = 1;
+    else if (dirx == 1 and diry == 0) {
+      dirx = 0;
+      diry = -1;
     }
   }
 
   void turnRight() {
-    if (posx == 0 and posy == 1) {
-      posx = 1;
-      posy = 0;
+    if (dirx == 0 and diry == -1) {
+      dirx = 1;
+      diry = 0;
     }
-    else if (posx == 1 and posy == 0) {
-      posx = 0;
-      posy = -1;
+    else if (dirx == 1 and diry == 0) {
+      dirx = 0;
+      diry = 1;
     }
-    else if (posx == 0 and posy == -1) {
-      posx = -1;
-      posy = 0;
+    else if (dirx == 0 and diry == 1) {
+      dirx = -1;
+      diry = 0;
     }
-    else if (posx == -1 and posy == 0) {
-      posx = 0;
-      posy = 1;
+    else if (dirx == -1 and diry == 0) {
+      dirx = 0;
+      diry = -1;
     }
   }
 
@@ -183,9 +199,9 @@ struct Simulator {
     case PATH_FORWARD:
       return grid[posx+dirx][posy+diry] != '*';
     case PATH_LEFT:
-      return grid[posx-diry][posy+dirx] != '*';
+      return grid[posx+diry][posy-dirx] != '*';
     case PATH_RIGHT:
-      return grid[posx+diry][posy-diry] != '*';
+      return grid[posx-diry][posy+dirx] != '*';
     }
   }
 
@@ -227,9 +243,13 @@ class do_cmd : public boost::static_visitor<void> {
   }
 
   void operator()(const Loop &loop) const {
-    while (true)
+    sim->clearStates();
+    while (true) {
+      sim->checkLoop();
+      sim->recordState();
       for (auto cmd : loop.commands)
         boost::apply_visitor(do_cmd(sim), cmd);
+    }
   }
 };
 
@@ -249,7 +269,7 @@ struct lexer {
     dict["si hay camino adelante:"] = IF_FORWARD;
     dict["si hay camino izquierda:"] = IF_LEFT;
     dict["si hay camino derecha:"] = IF_RIGHT;
-    dict["else:"] = ELSE;
+    dict["sino:"] = ELSE;
     dict["fin si;"] = ENDIF;
     dict["repetir:"] = LOOP;
     dict["fin repetir;"] = POOL;
@@ -302,7 +322,7 @@ std::vector<Command> parse(std::istream *lines) {
     if (tok == BLANK)
       continue;
     if (tok == UNKW_CMD)
-      abort("Error en línea " + std::to_string(i) + ": Comando desconocido: " +
+      abort("Error en línea " + std::to_string(i) + ": Instrucción desconocida: " +
             "`" + line + "`");
     if (tok == LOOP or tok == IF_FORWARD or tok == IF_LEFT or tok == IF_RIGHT) {
       frames.push({tok, std::vector<Command>()});
@@ -310,32 +330,37 @@ std::vector<Command> parse(std::istream *lines) {
       if (frames.size() == 1 or frames.top().first != LOOP) {
         abort("Error en línea " + std::to_string(i) + ": No se esperaba una "
               "instrucción `fin repetir;`. Revisa que las instrucciones "
-              "condicionales y de repetir estén bien anidadas.\n");
+              "condicionales y de repetir estén bien anidadas.");
       }
       std::vector<Command> frame(std::move(frames.top().second));
       frames.pop();
       frames.top().second.push_back(Loop(std::move(frame)));
     } else if (tok == ELSE) {
       Token match_tok = frames.top().first;
-      if (frames.size() == 1 or (match_tok != IF_LEFT and
+      if (frames.size() == 1 or (match_tok != IF_FORWARD and
                                  match_tok != IF_RIGHT and
                                  match_tok != IF_LEFT)) {
         abort("Error en línea " + std::to_string(i) + ": No se esperaba una "
               "instrucción 'sino:`. Revisa que las instrucciones "
-              "condicionales y de repetir estén bien anidadas.\n");
+              "condicionales y de repetir estén bien anidadas.");
       }
-      frames.push({match_tok, std::vector<Command>()});
+      frames.push({ELSE, std::vector<Command>()});
     } else if (tok == ENDIF) {
       Token match_tok = frames.top().first;
-      if (frames.size() == 1 or (match_tok != IF_LEFT and
+      if (frames.size() == 1 or (match_tok != IF_FORWARD and
                                  match_tok != IF_RIGHT and
-                                 match_tok != IF_LEFT)) {
+                                 match_tok != IF_LEFT and
+                                 match_tok != ELSE)) {
         abort("Error en línea " + std::to_string(i) + ": No se esperaba una "
               "instrucción 'fin si;`. Revisa que las instrucciones "
-              "condicionales y de repetir estén bien anidadas.\n");
+              "condicionales y de repetir estén bien anidadas.");
       }
-      std::vector<Command> else_frame(std::move(frames.top().second));
-      frames.pop();
+      std::vector<Command> else_frame;
+      if (match_tok == ELSE) {
+        else_frame = std::move(frames.top().second);
+        frames.pop();
+        match_tok = frames.top().first;
+      }
       std::vector<Command> then_frame(std::move(frames.top().second));
       frames.pop();
       Cond c = PATH_FORWARD;
@@ -355,9 +380,10 @@ std::vector<Command> parse(std::istream *lines) {
     }
     i++;
   }
-  if (frames.size() != 1)
+  if (frames.size() != 1) {
     abort("Error en línea " + std::to_string(i) + ": Hay instrucciones `repetir`"
-          " sin cerrar");
+          " o condicionales sin cerrar.");
+  }
   return std::move(frames.top().second);
 }
 
@@ -372,24 +398,35 @@ int main(int argc, char* argv[]) {
   int subtask;
   scanf("%d %d %d", &subtask, &N, &M);
 
-  if (subtask == 2 and (nifleft > 0 or nifright > 0 or nforward > 3)) {
+  if (subtask == 2 and nifleft > 0) {
     printf("1\n");
     printf("Tu respuesta no cumple las restricciones de la subtarea. Haz"
-           " usado %d veces la condición `hay camino izquierda`, %d veces la"
-           " condición `hay camino derecha` y %d veces la instrucción"
-           "`avanzar`.", nifleft, nifright, nforward);
+           " usado %d veces la condición `hay camino izquierda`\n", nifleft);
     exit(0);
   }
 
-  if (subtask == 3 and (nloop > 1 or nforward > 5)){
+  if (subtask == 2 and nifright > 0) {
     printf("1\n");
     printf("Tu respuesta no cumple las restricciones de la subtarea. Haz"
-           " usado %d veces la instrucción `repetir` y %d veces"
-           " `avanzar`.", nloop, nforward);
+           " usado %d veces la condición `hay camino derecha`\n", nifright);
     exit(0);
   }
 
-  std::vector<vector<int> > grid(N+2, vector<int>(M, '*'));
+  if (subtask == 2 and nforward > 3) {
+    printf("1\n");
+    printf("Tu respuesta no cumple las restricciones de la subtarea. Haz"
+           " usado %d veces la instrucción `avanzar`\n", nforward);
+    exit(0);
+  }
+
+  if (subtask == 3 and nforward > 10){
+    printf("1\n");
+    printf("Tu respuesta no cumple las restricciones de la subtarea. Haz"
+           " usado %d veces la instrucción `avanzar`\n", nforward);
+    exit(0);
+  }
+
+  std::vector<vector<int> > grid(M, vector<int>(N, '*'));
 
   int objects = 0;
   char c;
@@ -397,15 +434,16 @@ int main(int argc, char* argv[]) {
   uint posy = 0;
   int dirx = 0;
   int diry = 0;
-  for (int i = 1; i <= N; ++i) {
-    for (int j = 1; j <= M; ++j) {
-      scanf("%c", &c);
-      grid[i][j] = c;
+  getchar();
+  for (int i = 0; i < N; ++i) {
+    for (int j = 0; j < M; ++j) {
+      c = getchar();
+      grid[j][i] = c;
       if (c == 'o')
         objects++;
       if (c == '<' or c == '>' or c == '^' or c == 'v') {
-        posx = i;
-        posy = j;
+        posx = j;
+        posy = i;
       }
       if (c == '<') {
         dirx = -1;
@@ -413,7 +451,7 @@ int main(int argc, char* argv[]) {
       }
       if (c == '^') {
         dirx = 0;
-        diry = 1;
+        diry = -1;
       }
       if (c == '>') {
         dirx = 1;
@@ -421,11 +459,11 @@ int main(int argc, char* argv[]) {
       }
       if (c == 'v') {
         dirx = 0;
-        diry = -1;
+        diry = 1;
       }
     }
     // Read newline
-    scanf("%c", &c);
+    getchar();
   }
 
   Simulator sim(std::move(grid), posx, posy, dirx, diry, objects);

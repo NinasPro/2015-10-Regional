@@ -92,6 +92,8 @@ A continuación se muestra un escenario y una secuencia de instrucciones que log
  \endbgcolor{}
 \end{minipage}
 
+Debes tener cuidado con la instrucción \texttt{repetir} pues Olonso podría moverse sin parar en caso de que no recolectar todos los objetos.
+
 \subsubsection*{Instrucción condicional}
 Finalmente Olonso también puede tomar decisiones en base a lo que hay a su alrededor.
 Para eso posees la siguiente instrucción condicional.
@@ -106,7 +108,7 @@ fin si;
   
 Esta instrucción permite decidir que instrucciones realizará Olonso dependiendo de si una condición se cumple o no.
 Si la condición que se evalúa es cierta, entonces Olonso realizará las instrucciones que se encuentran entre los delimitadores `\texttt{si [condicon]:}' y `\texttt{sino:}', en caso contrario realizará las instrucciones que se encuentran entre `\texttt{sino:}' y `\texttt{fin si;}'.
-Puedes poner las instrucciones que desees dentro incluso más instrucciones condicionales anidadas.
+Puedes poner lo que desees dentro, incluso más instrucciones condicionales anidadas o ninguna instrucción.
 
 La condición que se evalúa puede ser una de las siguientes:
 
@@ -116,6 +118,9 @@ En otras palabras esta condición será cierta si la instrucción avanzar result
 \item \texttt{hay camino izquierda} --- Determina si hay camino hacia la izquierda de Olonso. 
 \item \texttt{hay camino derecha} --- Determina si hay camino hacia la derecha de Olonso. 
 \end{itemize}
+
+Notar que solo tienes estas condiciones y ninguna más.
+En particular no puedes preguntar por la negación de estas.
 
 \subsubsection*{Ejemplo 3}
 A continuación se muestra una secuencia de instrucciones que ocupa la instrucción condicional para recolectar todos los objetos del laberinto que se muestra en la imagen.
@@ -132,6 +137,7 @@ A continuación se muestra una secuencia de instrucciones que ocupa la instrucci
   repetir:
     si hay camino izquierda:
       girar izquierda
+      avanzar
     sino:
       avanzar
     fin si;
@@ -154,6 +160,8 @@ El símbolo \verb~#~ indica un comentario; cualquier texto que le sigue, hasta e
 
 No es necesario que envíes todos los archivos cada vez. En caso de no subir uno, se agregará automáticamente el último enviado (si es que existe).
 De esta forma te puedes concentrar en una subtarea a la vez.
+
+Al envíar un archivo si haces click en \texttt{details} y luego en alguna subtarea podrás obtener información de tus errores.
 
 
 \section*{Subtareas y puntaje}
@@ -179,6 +187,7 @@ Este laberinto se puede resolver con las siguientes instrucciones:
   repetir:
     si hay camino izquierda:
       girar izquierda
+      avanzar
     sino:
       avanzar
     fin si;
@@ -195,7 +204,7 @@ Además solo puedes usar la \textbf{instrucción `avanzar' 3 veces}.
 \includegraphics[scale=0.5]{laberintos/Subtarea3.eps}
 \end{minipage}
 \begin{minipage}{0.45\linewidth}
-En esta subtarea debes resolver el laberinto usando \textbf{sólo una instrucción `repetir' y no más de 5 instrucciones `avanzar'}.
+En esta subtarea debes resolver el laberinto usando \textbf{no más de 10 instrucciones `avanzar'}.
 \end{minipage}
 
 
