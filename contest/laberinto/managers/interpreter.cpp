@@ -412,14 +412,14 @@ int main(int argc, char* argv[]) {
     exit(0);
   }
 
-  if (subtask == 2 and nforward > 3) {
+  if (subtask == 2 and nforward > 2) {
     printf("1\n");
     printf("Tu respuesta no cumple las restricciones de la subtarea. Haz"
            " usado %d veces la instrucción `avanzar`\n", nforward);
     exit(0);
   }
 
-  if (subtask == 3 and nforward > 10){
+  if (subtask == 3 and nforward > 5){
     printf("1\n");
     printf("Tu respuesta no cumple las restricciones de la subtarea. Haz"
            " usado %d veces la instrucción `avanzar`\n", nforward);
@@ -469,9 +469,11 @@ int main(int argc, char* argv[]) {
   Simulator sim(std::move(grid), posx, posy, dirx, diry, objects);
   sim.simulate(cmds);
 
-  if (sim.objects > 0)
+  if (sim.objects > 0) {
     printf("2\n");
-  else
+    printf("Olonso no recogió todos los objetos.\n");
+  } else {
     printf("3\n");
+  }
   return 0;
 }

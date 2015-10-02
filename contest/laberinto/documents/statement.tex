@@ -69,6 +69,7 @@ Esta instrucción ejecutará todas las instrucciones que se encuentran entre los
 Las instrucciones terminarán de repetirse cuando se hayan recolectado todos los objetos.
 La ejecución de instrucciones terminará sin importar si quedaban más acciones por realizar.
 Recuerda que para recoger los objetos solo es necesario pasar por sobre de ellos.
+Debes tener cuidado con la instrucción \texttt{repetir} pues Olonso podría quedarse moviendo sin parar en caso de no recolectar todos los objetos.
 
 \subsubsection*{Ejemplo 2}
 A continuación se muestra un escenario y una secuencia de instrucciones que logra recolectar todos los objetos.
@@ -92,7 +93,6 @@ A continuación se muestra un escenario y una secuencia de instrucciones que log
  \endbgcolor{}
 \end{minipage}
 
-Debes tener cuidado con la instrucción \texttt{repetir} pues Olonso podría moverse sin parar en caso de que no recolectar todos los objetos.
 
 \subsubsection*{Instrucción condicional}
 Finalmente Olonso también puede tomar decisiones en base a lo que hay a su alrededor.
@@ -194,8 +194,8 @@ Este laberinto se puede resolver con las siguientes instrucciones:
   fin repetir;
 \end{verbatim}
 
-Para esta subtarea debes resolverlo usando \textbf{solo la condición `hay camino adelante'} para las instrucciones condicionales.
-Además solo puedes usar la \textbf{instrucción `avanzar' 3 veces}.
+Para esta subtarea debes resolverlo usando \textbf{solo la condición `hay camino adelante'}.
+Además solo puedes usar la \textbf{instrucción `avanzar' 2 veces}.
 \end{minipage}
 
 \subsubsection*{Subtarea 3 -- 40 puntos}
@@ -204,7 +204,7 @@ Además solo puedes usar la \textbf{instrucción `avanzar' 3 veces}.
 \includegraphics[scale=0.5]{laberintos/Subtarea3.eps}
 \end{minipage}
 \begin{minipage}{0.45\linewidth}
-En esta subtarea debes resolver el laberinto usando \textbf{no más de 10 instrucciones `avanzar'}.
+En esta subtarea debes resolver el laberinto usando \textbf{no más de 5 instrucciones `avanzar'}.
 \end{minipage}
 
 

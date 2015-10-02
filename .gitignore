@@ -24,3 +24,7 @@
 _region_*
 auto
 *.fmt
+*converted-to.pdf
+*~
+*.zip
+TAGS
