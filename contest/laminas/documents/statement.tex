@@ -1,6 +1,7 @@
 \documentclass{oci}
 \usepackage[utf8]{inputenc}
 \usepackage{lipsum}
+% \usepackage[spanish]{babel}
 
 \title{Colección de láminas}
 
@@ -45,10 +46,11 @@ El primer entero al precio de la lámina 1, el segundo al precio de la lámina 2
 Las siguientes $S$ líneas contienen la descripción de cada sobre que compró Jorge.
 Cada una de estas líneas contiene 5 enteros entre 1 y $N$ describiendo las láminas que salieron en el sobre.
 Debes asumir que considerando todos los sobres es posible juntar las $N$ láminas. 
+Además Jorge no compró sobres extras, es decir, en el último sobre obtuvo las últimas láminas que le faltaban.
 \end{inputDescription}
 
 \begin{outputDescription}
-Debes imprimir un sólo entero correspondiente a la mínima cantidad de dinero que podría haber gastado Jorge si solo hubiera comprado sobres hasta cierto punto y luego hubiera comprado el resto de las láminas sueltas.
+Debes imprimir un solo entero correspondiente a la mínima cantidad de dinero que podría haber gastado Jorge si solo hubiera comprado sobres hasta cierto punto y luego hubiera comprado el resto de las láminas sueltas.
 \end{outputDescription}
 
 \begin{scoreDescription}
@@ -57,15 +59,24 @@ Debes imprimir un sólo entero correspondiente a la mínima cantidad de dinero q
   \score{25} Se probarán varios casos donde
  $0<P\leq 5,\ 2 < S \leq 100,\ 10 < N \leq 500$ y nunca salen láminas repetidas.
   \score{25} Se probarán varios casos donde
-$0<P\leq 1000,\ 100 < S \leq 1000,\ 500 < N \leq 5000$ y todos las láminas sueltas tienen el mismo precio.
+$0<P\leq 1000,\ 100 < S \leq 1000,\ 500 < N \leq 5000$ y todas las láminas sueltas tienen el mismo precio.
   \score{30} Se probarán varios casos donde
 $0<P\leq 1000,\ 100 < S \leq 1000,\ 500<N\leq 5000$
 y no hay restricciones adicionales.
 \end{scoreDescription}
 
 \begin{sampleDescription}
-% \sampleIO{sample}
-% \sampleIO{sample}
+\sampleIO{sample1}
+\sampleIO{sample2}
+
+En el primer ejemplo el álbum está compuesto por 7 láminas, Jorge compró 4 sobres y cada uno costó 5 unidades.
+En este caso a Jorge le hubiese convenido comprar solo hasta el segundo sobre.
+De esta forma Jorge hubiese conseguido las láminas 3, 4, 5, 6 y 7 gastando 10 unidades en sobres.
+Luego podría haber comprado las láminas 1 y 2 por 5 y 4 unidades respectivamente para un total de 19 unidades sumando a los sobres.
+Notar que Jorge podría haber gastado la misma cantidad de dinero si hubiese comprado hasta el tercer sobre y luego la lámina 2 suelta.
+
+En el segundo ejemplo comprar láminas sueltas no hubiese ayudado a Jorge y lo óptimo hubiese sido comprar todos los sobres por 5 unidades cada uno para un total de 20 unidades.
+
 \end{sampleDescription}
 
 \end{document}
