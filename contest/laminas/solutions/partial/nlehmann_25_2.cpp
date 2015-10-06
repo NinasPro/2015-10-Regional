@@ -15,12 +15,13 @@ using namespace std;
 int main() {
   int N, S, P;
   cin >> N >> S >> P;
-  vector<int> price(N + 1);
+  vector<bool> usada(N+1);
+  int price;
 
   int single = 0;
   for (int i = 1; i <= N; ++i) {
-    cin >> price[i];
-    single += price[i];
+    cin >> price;
+    single += price;
   }
 
   int min = single;
@@ -29,8 +30,9 @@ int main() {
     for (int j = 0; j < 5; ++j) {
       int l;
       cin >> l;
-      single -= price[l];
-      price[l] = 0;
+      if (not usada[l])
+        single -= price;
+      usada[l] = true;
     }
     if (single + (i+1)*P < min) {
       min = single + (i+1)*P;

@@ -9,35 +9,24 @@
 
 #include <vector>
 #include <iostream>
-#include <algorithm>
 using namespace std;
 
 int main() {
-  int N, S, P;
-  cin >> N >> S >> P;
-  vector<int> price(N + 1);
+  int N;
+  cin >> N;
+  vector<int> altura(500, 0);
 
-  int single = 0;
-  for (int i = 1; i <= N; ++i) {
-    cin >> price[i];
-    single += price[i];
+  for (int i = 0; i < N; ++i) {
+    int h;
+    cin >> h;
+    altura[h]++;
   }
 
-  int min = single;
-  int imin = -1;
-  for (int i = 0; i < S; ++i) {
-    for (int j = 0; j < 5; ++j) {
-      int l;
-      cin >> l;
-      single -= price[l];
-      price[l] = 0;
-    }
-    if (single + (i+1)*P < min) {
-      min = single + (i+1)*P;
-      imin = i;
-    }
+  for (int h = 0; h < 500; ++h) {
+    if(altura[h])
+      cout << h << " " << h << endl;
   }
-  cerr << imin << endl;
 
-  cout << min << endl;
+  return 0;
 }
+
