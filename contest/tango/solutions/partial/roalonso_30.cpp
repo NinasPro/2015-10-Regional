@@ -1,13 +1,10 @@
 #include <vector>
 #include <cstdio>
-#include <climits>
 #include <algorithm>
 
 using namespace std;
 
 int main (int argc, char *argv[]) {
-	
-	// Entrada
 	int n;
 	
 	scanf("%d", &n);
@@ -28,12 +25,12 @@ int main (int argc, char *argv[]) {
 	}
 	
 	// Ordenamiento
-	if (x[0].first > x[1].first) {
+	if (n == 2 && x[0].first > x[1].first) {
 		pair<int,int> tmp = x[0];
 		x[0] = x[1];
 		x[1] = tmp;
 	}
-	if (y[0].first > y[1].first) {
+	if (n == 2 && y[0].first > y[1].first) {
 		pair<int,int> tmp = y[0];
 		y[0] = y[1];
 		y[1] = tmp;
@@ -42,8 +39,8 @@ int main (int argc, char *argv[]) {
 	// Procesamiento de datos
 	int l = 0;
 	int u = n - 1;
-	for (int i = 0; i < n; i++) {
-		if (x[i].first > y[l].first) {
+	for (int i = 0; i <= n; i++) {
+		if (x[i].first >= y[l].first) {
 			// Parejas según criterio
 			printf("%d %d\n", x[i].first, y[l].first);
 			l++;
