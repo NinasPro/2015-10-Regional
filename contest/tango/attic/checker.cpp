@@ -22,64 +22,64 @@ int main (int argc, char *argv[]) {
 	ifstream fin;  	// Input
 	ifstream fcorr;	// Expected
 	ifstream ftest;	// Submission
-	
+
 	int n;         	// Number of pairs
-	
+
 	fin.open(argv[1]);
 	fcorr.open(argv[2]);
 	ftest.open(argv[3]);
-	
+
 	if (!fin.is_open()) {
 		cerr << "Could not open file \"" << argv[1] << "\".\n";
 		return 1;
 	}
-	
+
 	if (!fcorr.is_open()) {
 		cerr << "Could not open file \"" << argv[2] << "\".\n";
 		return 2;
 	}
-	
+
 	if (!ftest.is_open()) {
 		cerr << "Could not open file \"" << argv[3] << "\".\n";
 		return 3;
 	}
-	
+
 	fin >> n;
-	
+
 	vector<int> mm(161, 0);
 	vector<int> ff(161, 0);
-	
+
 	int h;
-	
+
 	for (int i = 0; i < n; i++) {
 		fin >> h;
 		mm[h-50]++;
 	}
-	
+
 	for (int i = 0; i < n; i++) {
 		fin >> h;
 		ff[h-50]++;
 	}
-	
+
 	fin.close();
-	
+
 	int r = 0;     	// Maximum number of couples
-	
+
 	char str[12];  	// Buffer
-	
+
 	do {
 		fcorr.getline(str, 12);
 		if (strlen(str) > 0) r++;
 	} while (!(fcorr.rdstate() & ifstream::eofbit));
-	
+
 	fcorr.close();
-	
+
 	int state = M;
-	
+
 	int c;
 	int hm = 0, hf = 0;
-	int cnt = 0;
-	
+	// int cnt = 0;
+
 	while (true) {
 		c = ftest.get();
 		switch (c) {
@@ -102,7 +102,7 @@ int main (int argc, char *argv[]) {
 				}
 			}
 			break;
-		
+
 		case ' ':
 			if (state == M) {
 				// Check if height is valid and available
@@ -121,13 +121,13 @@ int main (int argc, char *argv[]) {
 				return wrong_ans();
 			}
 			break;
-		
+
 		case EOF:
 			if (state == M && hm == 0) {
 				goto endloop;
 			}
 // 			break;
-		
+
 		case '\n':
 			if (state == F) {
 				// Check if height is valid and available
@@ -155,17 +155,18 @@ int main (int argc, char *argv[]) {
 				return wrong_ans();
 			}
 			break;
-		
+
 		default:
 			cerr << "Error de formato: símbolo \'" << (char)c << "\' desconocido.\n";
 			return wrong_ans();
 		}
 	}
 	endloop:
-	
-	if (r != 0)
+
+	if (r != 0) {
 		cerr << "Número de parejas es subóptimo.\n";
 		return wrong_ans();
-	
+  }
+
 	return right_ans();
 }
