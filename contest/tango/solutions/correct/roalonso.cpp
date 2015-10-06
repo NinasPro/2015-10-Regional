@@ -34,7 +34,7 @@ int main (int argc, char *argv[]) {
 	int l = 0;
 	int u = h - 1;
 	for (int i = 0; i < h; i++) {
-		if (x[i].first > y[l].first) {
+		if (x[i].first >= y[l].first) {
 			// Parejas según criterio
 			printf("%d %d\n", x[i].first, y[l].first);
 			l++;
