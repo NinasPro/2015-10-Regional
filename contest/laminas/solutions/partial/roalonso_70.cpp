@@ -50,7 +50,7 @@ int main() {
 		min = c = n*lam;
 		
 		for (int i = 0; i < s; i++) {
-			if (s == 2) {
+			if (i == 2) {
 				break;
 			}
 			c += p;
