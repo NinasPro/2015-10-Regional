@@ -166,7 +166,7 @@ int main (int argc, char *argv[]) {
 	if (r != 0) {
 		cerr << "Número de parejas es subóptimo.\n";
 		return wrong_ans();
-  }
+	}
 
 	return right_ans();
 }
