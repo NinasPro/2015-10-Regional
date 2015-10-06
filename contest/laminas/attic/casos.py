@@ -5,14 +5,14 @@ p=random.randint(1,1000)
 # s=1000
 s=random.randint(101, 1000)
 n=random.randint(501, s*5)
-iguales=True
+iguales=False
 
 if iguales:
     precios=[random.randint(1,2*p)]*n
 else:
     precios = [0]*n
     for i in range(n):
-            precios[i] = random.randint(1, 5*p)
+            precios[i] = random.randint(1, 3*p)
 
 ultima=random.randint(1,n)
 cartas=range(1, ultima)+range(ultima+1, n+1)
