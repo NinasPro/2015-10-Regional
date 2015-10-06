@@ -5,19 +5,19 @@ int main() {
 	int n, s, p;
 	int u;
 	int min;
-	
+
 	scanf("%d %d %d", &n, &s, &p);
-	
+
 	int c = 0;
-	
+
 	int lam;
 	std::vector<bool> have(n+1, false);
-	
+
 	for (int i = 0; i < n; i++) {
 		scanf("%d", &lam);
 	}
 	min = c = n*lam;
-	
+
 	for (int i = 0; i < s; i++) {
 		if (s == 2) {
 			break;
@@ -34,7 +34,7 @@ int main() {
 			min = c;
 		}
 	}
-	
+
 	printf("%d\n", min);
 	return 0;
 }
