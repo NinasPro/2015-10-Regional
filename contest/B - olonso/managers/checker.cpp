@@ -33,4 +33,5 @@ int main(int, char *argv[]) {
   case 3:
     cout << 1.0;
   }
+  return 0;
 }

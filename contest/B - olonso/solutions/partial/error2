@@ -1,0 +1,4 @@
+repetir:
+  si hay camino derecha:
+  fin repetir;
+fin repetir;
