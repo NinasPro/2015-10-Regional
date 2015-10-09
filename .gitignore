@@ -30,7 +30,7 @@ auto
 *.zip
 TAGS
 *.bin
-*.sol
+**/testdata/*.sol
 problemset.pdf
 interpreter
 checker
