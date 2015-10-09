@@ -26,8 +26,11 @@ auto
 *.fmt
 *converted-to.pdf
 *~
+# OCIMATIC
 *.zip
 TAGS
 *.bin
 *.sol
 problemset.pdf
+interpreter
+checker
