@@ -1,0 +1,8 @@
+repetir:
+  girar izquierda
+  si hay camino adelante:
+  sino:
+    girar derecha
+  fin si;
+  avanzar
+fin repetir;
